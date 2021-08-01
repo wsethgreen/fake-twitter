@@ -46,6 +46,7 @@ public class AuthController {
             userService.saveNewUser(user);
             model.addAttribute("success", "Sign up successful");
             model.addAttribute("user", new User());
+            return "registrationSuccess";
         }
 
         return "registration";
