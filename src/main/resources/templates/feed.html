@@ -1,44 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
 <head>
-
     <title id="title">Feed</title>
-
-    <div th:replace="/fragments/headlinks :: head-styles" ></div>
-
 </head>
 <body>
-
 <div th:replace="fragments/navbar"></div>
-
-<div>
-    <h2>Profile for <span th:text="${user.firstName}"></span>
-        <span th:text="${user.lastName}"></span> - <span style="color: #00aced">@<span
-                th:text="${user.username}"></span></span></h2>
-    <h5>Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span></h5>
-</div>
-
 <ul class="nav nav-tabs">
     <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
         <a href="/tweets">All</a></li>
     <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
         <a href="/tweets?filter=following">Following</a></li>
 </ul><br/>
-
 <div th:if="${#lists.isEmpty(tweetList) and filter == 'all'}">
     <h3>No tweets have been created yet</h3>
 </div>
 <div th:if="${#lists.isEmpty(tweetList) and filter == 'following'}">
     <h3>No tweets have been created by your followers</h3>
 </div>
-
 <div class="container">
     <h2>Tweets containing #<span th:text="${tag}"></span></h2>
     <div class="list-group" th:each="tweet:${tweetList}">
         <div class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a><small> <span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>
+                <!--        change the date to tweets.data-->
+                <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span
+                        th:text="${tweet.user.username}"></span></a><small> <span th:text="${tweet.date}"></span></small>
             </div>
             <p class="mb-1" th:utext="${tweet.message}"></p>
         </div>

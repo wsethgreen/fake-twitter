@@ -27,6 +27,7 @@ public class User {
     // Create the different variables for our User object
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long id;
 
     @Email(message = "Please provide a valid email.")
